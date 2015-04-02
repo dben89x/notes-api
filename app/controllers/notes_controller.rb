@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  before_action :set_note, only: [:show, :update, :destroy]
+
   def index
     @notes = Note.all
     render json: @notes
@@ -6,30 +8,30 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-    if @note.save
-    else
-      render :new
-    end
+    @note.save
+    render json: @note
   end
 
   def show
-
   end
 
   def update
-    if @note.update(note_params)
-    else
-      render :edit
-    end
+    @note.update
+      render json: @note
   end
 
   def destroy
-    @note.destroy
+    if @note.destroy
+      render json: @note
+    end
   end
 
-  private
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
   def note_params
     params.require(:note).permit(:title, :body)
   end
+
 end

@@ -8,3 +8,4 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'faker'
 gem 'active_model_serializers', '~> 0.9.1'
+gem 'rack-cors'
